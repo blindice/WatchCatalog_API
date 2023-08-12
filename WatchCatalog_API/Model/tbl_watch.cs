@@ -12,7 +12,7 @@ namespace WatchCatalog_API.Model
         [Key]
         public int WatchId { get; set; }
         [StringLength(100)]
-        public string Image { get; set; } = null!;
+        public string? Image { get; set; }
         [StringLength(20)]
         [Unicode(false)]
         public string WatchName { get; set; } = null!;

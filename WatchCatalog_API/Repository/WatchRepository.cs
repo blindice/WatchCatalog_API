@@ -21,7 +21,7 @@ namespace WatchCatalog_API.Repository
 
         public async Task<tbl_watch?> GetWatchByIdAsync(int id, CancellationToken cancellation)
         {
-            return await _context.tbl_watches.Where(w => w.WatchId == id).FirstOrDefaultAsync(cancellation);
+            return await _context.tbl_watches.Where(w => w.WatchId == id).AsNoTracking().FirstOrDefaultAsync(cancellation);
         }
 
         public async Task UpdateWatchAsync(tbl_watch watch)
@@ -30,10 +30,12 @@ namespace WatchCatalog_API.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddWatchAsync(tbl_watch watch)
+        public async Task<tbl_watch> AddWatchAsync(tbl_watch watch)
         {
             _context.tbl_watches.Add(watch);
             await _context.SaveChangesAsync();
+
+            return watch;
         }
     }
 }

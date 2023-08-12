@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure.Storage.Blobs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Threading;
 using WatchCatalog_API.DTOs;
 using WatchCatalog_API.Filters;
 using WatchCatalog_API.Interfaces;
 using WatchCatalog_API.Model;
+using WatchCatalog_API.Services;
 
 namespace WatchCatalog_API.Controllers
 {
@@ -12,14 +15,17 @@ namespace WatchCatalog_API.Controllers
     [ApiController]
     public class WatchController : ControllerBase
     {
-        readonly IWatchRepository _repo;
+        readonly IWatchService _service;
 
-        public WatchController(IWatchRepository repo) => _repo = repo;
+        public WatchController(IWatchService service)
+        {
+            _service = service;
+        }
 
         [HttpGet("getwatches")]
         public async Task<IActionResult> GetWatchesAsync(CancellationToken cancellationToken)
         {
-            List<tbl_watch> watches = await _repo.GetWatches().ToListAsync(cancellationToken);
+            List<WatchDTO> watches = await _service.GetWatchesAsync(cancellationToken);
             return Ok(watches);
         }
 
@@ -27,34 +33,39 @@ namespace WatchCatalog_API.Controllers
         [ValidationFilterAttribute]
         public async Task<IActionResult> GetWatchByIdAsync(int? id, CancellationToken cancellationToken)
         {
-            tbl_watch? watch = await _repo.GetWatchByIdAsync((int)id, cancellationToken);
+            WatchDetailsDTO? watch = await _service.GetWatchAsync((int)id!, cancellationToken);
 
             if (watch == null) return NotFound();
 
-           return Ok(watch);
+            return Ok(watch);
         }
 
         [HttpPut("updatewatch")]
         [ValidationFilterAttribute]
-        public async Task<IActionResult> UpdateWatchAsync([FromBody]tbl_watch watch, CancellationToken cancellationToken)
+        public async Task<IActionResult> UpdateWatchAsync([FromForm] UpdateWatchDTO watch, CancellationToken cancellationToken)
         {
-            tbl_watch? validatedWatch = await _repo.GetWatchByIdAsync(watch.WatchId, cancellationToken);
+            WatchDetailsDTO watchResult = await _service.UpdateWatchAsync(watch, cancellationToken);
 
-            //if (validatedWatch == null) return NotFound();
-
-            await _repo.UpdateWatchAsync(watch);
-
-            return Ok(watch);
+            return Ok(watchResult);
         }
 
         [HttpPost("createwatch")]
         [ValidationFilterAttribute]
-        public async Task<IActionResult> CreateWatchAsync([FromForm]CreateWatchDTO watch)
+        public async Task<IActionResult> CreateWatchAsync([FromForm] CreateWatchDTO watch)
         {
             //await _repo.AddWatchAsync(watch);
+            var result = await _service.CreateWatchAsync(watch);
 
-            return Ok(watch);
+            return Ok(result);
         }
 
+
+        [HttpPost("togglewatch")]
+        public async Task<IActionResult> ToggleWatch([FromBody]ToggleWatchDTO watch, CancellationToken cancellationToken)
+        {
+            WatchDetailsDTO watchResult = await _service.ToggleWatchAsync(watch, cancellationToken);
+
+            return Ok(watchResult);
+        }
     }
 }

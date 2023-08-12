@@ -1,12 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WatchCatalog_API.DTOs
 {
-    public class CreateWatchDTO
+    public class UpdateWatchDTO
     {
+        [Required]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Id must be numeric")]
+        public int WatchId { get; set; }
+
         public IFormFile? Image { get; set; }
 
         [StringLength(20)]
@@ -41,6 +45,7 @@ namespace WatchCatalog_API.DTOs
         [Unicode(false)]
         public string Strap { get; set; } = null!;
 
+        [Required]
         public bool? IsActive { get; set; }
     }
 }
