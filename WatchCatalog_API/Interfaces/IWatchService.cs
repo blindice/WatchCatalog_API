@@ -1,10 +1,11 @@
 ﻿using WatchCatalog_API.DTOs;
+using WatchCatalog_API.Helpers;
 
 namespace WatchCatalog_API.Interfaces
 {
     public interface IWatchService
     {
-        Task<List<WatchDTO>> GetWatchesAsync(CancellationToken cancellationToken);
+        Task<PagedList<WatchDTO>> GetWatchesAsync(WatchPageParameters pageParams, CancellationToken cancellationToken);
 
         Task<WatchDetailsDTO> GetWatchAsync(int id, CancellationToken cancellationToken);
 

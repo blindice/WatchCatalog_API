@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.Threading;
 using WatchCatalog_API.DTOs;
 using WatchCatalog_API.Filters;
+using WatchCatalog_API.Helpers;
 using WatchCatalog_API.Interfaces;
 using WatchCatalog_API.Model;
 using WatchCatalog_API.Services;
@@ -23,9 +25,21 @@ namespace WatchCatalog_API.Controllers
         }
 
         [HttpGet("getwatches")]
-        public async Task<IActionResult> GetWatchesAsync(CancellationToken cancellationToken)
+        public async Task<IActionResult> GetWatchesAsync([FromQuery] WatchPageParameters pageParam, CancellationToken cancellationToken)
         {
-            List<WatchDTO> watches = await _service.GetWatchesAsync(cancellationToken);
+            PagedList<WatchDTO> watches = await _service.GetWatchesAsync(pageParam, cancellationToken);
+
+            var metadata = new
+            {
+                watches.TotalCount,
+                watches.PageSize,
+                watches.CurrentPage,
+                watches.TotalPages,
+                watches.HasNext,
+                watches.HasPrevious
+            };
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+
             return Ok(watches);
         }
 

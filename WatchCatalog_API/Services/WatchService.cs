@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileSystemGlobbing;
 using System.Threading;
 using WatchCatalog_API.DTOs;
+using WatchCatalog_API.Helpers;
 using WatchCatalog_API.Interfaces;
 using WatchCatalog_API.Model;
 
@@ -23,9 +24,9 @@ namespace WatchCatalog_API.Services
             _mapper = mapper ?? throw new NullReferenceException();
         }
 
-        public async Task<List<WatchDTO>> GetWatchesAsync(CancellationToken cancellationToken)
+        public async Task<PagedList<WatchDTO>> GetWatchesAsync(WatchPageParameters pageParams, CancellationToken cancellationToken)
         {
-            List<WatchDTO> watches = await _repo.GetWatches()
+            IQueryable<WatchDTO> watches = _repo.GetWatches()
                                                 .Select(w => new WatchDTO
                                                 {
                                                     WatchId = w.WatchId,
@@ -33,10 +34,11 @@ namespace WatchCatalog_API.Services
                                                     Price = w.Price,
                                                     Short_description = w.Short_description,
                                                     IsActive = w.IsActive
-                                                })
-                                                .ToListAsync(cancellationToken);
+                                                });
 
-            return watches;
+            var pagedWatches = await PagedList<WatchDTO>.ToPagedList(watches, pageParams.PageNumber, pageParams.PageSize, cancellationToken);
+
+            return pagedWatches;
         }
 
         public async Task<WatchDetailsDTO> GetWatchAsync(int id, CancellationToken cancellationToken)
@@ -148,7 +150,7 @@ namespace WatchCatalog_API.Services
 
             if (verifiedWatch == null) throw new NullReferenceException("Watch to Delete Not Found!");
 
-            if(!string.IsNullOrEmpty(verifiedWatch.Image))
+            if (!string.IsNullOrEmpty(verifiedWatch.Image))
                 await _storageService.DeleteAsync(verifiedWatch.Image);
 
             await _repo.DeleteWatchAsync(verifiedWatch);
