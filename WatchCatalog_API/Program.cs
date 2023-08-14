@@ -20,7 +20,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddDbContextPool<WatchContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 builder.Services.AddScoped<IWatchRepository, WatchRepository>();
 builder.Services.AddScoped<IWatchService, WatchService>();
-builder.Services.AddScoped<IAzureStorageService,  AzureStorageService>();
+builder.Services.AddScoped<IAzureStorageService, AzureStorageService>();
 builder.Services.AddMvc(builder => builder.Filters.Add(new GlobalExceptionFilter()));
 builder.Services.AddAzureClients(azureBuilder => azureBuilder.AddBlobServiceClient(storageConnection));
 builder.Services.Configure<ApiBehaviorOptions>(options =>
@@ -31,11 +31,10 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 app.UseHttpsRedirection();
 
