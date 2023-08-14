@@ -15,7 +15,7 @@ namespace WatchCatalog_API.Services
         {
             _blobService = blobService ?? throw new NullReferenceException();
             _config = config;
-            _containerClient = _blobService.GetBlobContainerClient(_config["Blob:Container:Name"]);
+            _containerClient = _blobService.GetBlobContainerClient(_config.GetValue<string>("Connection:Azure:Container"));
             _containerUri = $"{_containerClient.Uri.AbsoluteUri}/";
         }
 

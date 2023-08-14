@@ -1,0 +1,1 @@
+﻿dotnet ef dbcontext scaffold name=Default --context WatchContext --context-dir Context/ --output-dir Model/ --use-database-names --data-annotations Microsoft.EntityFrameworkCore.SqlServer --force

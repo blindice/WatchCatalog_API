@@ -8,7 +8,7 @@ using WatchCatalog_API.Repository;
 using WatchCatalog_API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-var storageConnection = builder.Configuration["Connection:Azure:Blob"];
+var storageConnection = builder.Configuration.GetValue<string>("Connection:Azure:Blob");
 
 // Add services to the container.
 
