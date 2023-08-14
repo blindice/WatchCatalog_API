@@ -9,14 +9,14 @@ namespace WatchCatalog_API.Filters
     {
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            if (context.Result is null) return;
+            //if (context.Result is null) return;
 
-            var result = (ObjectResult)context.Result;
+            //var result = (ObjectResult)context.Result;
 
-            if (result.StatusCode == 200)
-            {
-                return;
-            }
+            //if (result.StatusCode == 200)
+            //{
+            //    return;
+            //}
         }
 
         public void OnActionExecuting(ActionExecutingContext context)

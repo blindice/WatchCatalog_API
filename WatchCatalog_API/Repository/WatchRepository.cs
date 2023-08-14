@@ -37,5 +37,11 @@ namespace WatchCatalog_API.Repository
 
             return watch;
         }
+
+        public async Task DeleteWatchAsync(tbl_watch watch)
+        {
+            _context.tbl_watches.Remove(watch);
+            await _context.SaveChangesAsync();
+        }
     }
 }

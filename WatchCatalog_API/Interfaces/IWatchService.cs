@@ -13,5 +13,7 @@ namespace WatchCatalog_API.Interfaces
         Task<WatchDetailsDTO> CreateWatchAsync(CreateWatchDTO watch);
 
         Task<WatchDetailsDTO> ToggleWatchAsync(ToggleWatchDTO watch, CancellationToken cancellationToken);
+
+        Task<WatchDetailsDTO> DeleteWatchAsync(int id, CancellationToken cancellationToken);
     }
 }

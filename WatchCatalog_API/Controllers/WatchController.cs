@@ -61,9 +61,18 @@ namespace WatchCatalog_API.Controllers
 
 
         [HttpPost("togglewatch")]
-        public async Task<IActionResult> ToggleWatch([FromBody]ToggleWatchDTO watch, CancellationToken cancellationToken)
+        public async Task<IActionResult> ToggleWatchAsync([FromBody]ToggleWatchDTO watch, CancellationToken cancellationToken)
         {
             WatchDetailsDTO watchResult = await _service.ToggleWatchAsync(watch, cancellationToken);
+
+            return Ok(watchResult);
+        }
+
+        [HttpDelete("deletewatch/{id}")]
+        [ValidationFilterAttribute]
+        public async Task<IActionResult> DeleteWatchAsync(int? id, CancellationToken cancellationToken)
+        {
+            WatchDetailsDTO watchResult = await _service.DeleteWatchAsync((int)id!, cancellationToken);
 
             return Ok(watchResult);
         }

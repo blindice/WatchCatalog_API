@@ -8,7 +8,7 @@ namespace WatchCatalog_API.Filters
     {
         public void OnException(ExceptionContext context)
         {
-            context.Result = new ObjectResult(context.Exception.Message)
+            context.Result = new ObjectResult(new { message = context.Exception.Message, stackTrace = context.Exception.StackTrace })
             {
                 StatusCode = 500,
             };

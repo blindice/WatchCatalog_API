@@ -16,5 +16,7 @@ namespace WatchCatalog_API.Interfaces
         Task UpdateWatchAsync(tbl_watch watch);
 
         Task<tbl_watch> AddWatchAsync(tbl_watch watch);
+
+        Task DeleteWatchAsync(tbl_watch watch);
     }
 }

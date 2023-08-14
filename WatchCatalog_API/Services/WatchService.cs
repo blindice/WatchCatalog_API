@@ -141,5 +141,21 @@ namespace WatchCatalog_API.Services
 
             return resultWatch;
         }
+
+        public async Task<WatchDetailsDTO> DeleteWatchAsync(int id, CancellationToken cancellationToken)
+        {
+            tbl_watch? verifiedWatch = await _repo.GetWatchByIdAsync(id, cancellationToken);
+
+            if (verifiedWatch == null) throw new NullReferenceException("Watch to Delete Not Found!");
+
+            if(!string.IsNullOrEmpty(verifiedWatch.Image))
+                await _storageService.DeleteAsync(verifiedWatch.Image);
+
+            await _repo.DeleteWatchAsync(verifiedWatch);
+
+            var resultWatch = _mapper.Map<WatchDetailsDTO>(verifiedWatch);
+
+            return resultWatch;
+        }
     }
 }
