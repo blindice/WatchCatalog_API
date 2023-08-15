@@ -137,7 +137,7 @@ namespace WatchCatalog_API.Services
 
             if (verifiedWatch == null) throw new NullReferenceException("Watch to Toggle Not Found!");
 
-            verifiedWatch.IsActive = watch.IsActive;
+            verifiedWatch.IsActive = !watch.IsActive;
 
             await _repo.UpdateWatchAsync(verifiedWatch);
             var resultWatch = _mapper.Map<WatchDetailsDTO>(verifiedWatch);

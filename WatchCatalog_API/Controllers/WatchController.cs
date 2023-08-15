@@ -74,7 +74,7 @@ namespace WatchCatalog_API.Controllers
         }
 
 
-        [HttpPost("togglewatch")]
+        [HttpPut("togglewatch")]
         public async Task<IActionResult> ToggleWatchAsync([FromBody]ToggleWatchDTO watch, CancellationToken cancellationToken)
         {
             WatchDetailsDTO watchResult = await _service.ToggleWatchAsync(watch, cancellationToken);
