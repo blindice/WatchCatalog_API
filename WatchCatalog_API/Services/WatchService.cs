@@ -30,6 +30,7 @@ namespace WatchCatalog_API.Services
                                                 .Select(w => new WatchDTO
                                                 {
                                                     WatchId = w.WatchId,
+                                                    WatchName = w.WatchName,
                                                     Image = w.Image,
                                                     Price = w.Price,
                                                     Short_description = w.Short_description,

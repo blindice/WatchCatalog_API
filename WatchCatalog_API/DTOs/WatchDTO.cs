@@ -6,6 +6,8 @@ namespace WatchCatalog_API.DTOs
     {
         public int WatchId { get; set; }
 
+        public string WatchName { get; set; } = null!;
+
         public string Image { get; set; } = null!;
 
         public string Short_description { get; set; } = null!;
