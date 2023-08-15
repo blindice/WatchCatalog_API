@@ -4,7 +4,7 @@
 
 namespace WatchCatalog_API.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialMigrate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,11 +14,12 @@ namespace WatchCatalog_API.Migrations
                 {
                     WatchId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Image = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     WatchName = table.Column<string>(type: "varchar(20)", unicode: false, maxLength: 20, nullable: false),
                     Short_description = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
                     Full_Description = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(13,4)", nullable: false),
+                    Chronograph = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
                     Caliber = table.Column<string>(type: "varchar(30)", unicode: false, maxLength: 30, nullable: false),
                     Weight = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
                     Height = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
@@ -26,7 +27,8 @@ namespace WatchCatalog_API.Migrations
                     Thickness = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
                     Jewel = table.Column<string>(type: "varchar(30)", unicode: false, maxLength: 30, nullable: false),
                     Case = table.Column<string>(type: "varchar(30)", unicode: false, maxLength: 30, nullable: false),
-                    Strap = table.Column<string>(type: "varchar(30)", unicode: false, maxLength: 30, nullable: false)
+                    Strap = table.Column<string>(type: "varchar(30)", unicode: false, maxLength: 30, nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "((1))")
                 },
                 constraints: table =>
                 {

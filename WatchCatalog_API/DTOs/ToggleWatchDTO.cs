@@ -6,7 +6,6 @@ namespace WatchCatalog_API.DTOs
     {
         [Required]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Id must be numeric")]
-
         public int WatchId { get; set; }
 
         [Required]

@@ -24,6 +24,9 @@ namespace WatchCatalog_API.DTOs
         public string Full_Description { get; set; } = null!;
         [Column(TypeName = "decimal(13, 4)")]
         public decimal Price { get; set; }
+        [StringLength(50)]
+        [Unicode(false)]
+        public string Chronograph { get; set; } = null!;
         [StringLength(30)]
         [Unicode(false)]
         public string Caliber { get; set; } = null!;

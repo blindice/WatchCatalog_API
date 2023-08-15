@@ -19,6 +19,8 @@ namespace WatchCatalog_API.DTOs
 
         public decimal Price { get; set; }
 
+        public string Chronograph { get; set; } = null!;
+
         public string Caliber { get; set; } = null!;
 
         public decimal Weight { get; set; }
