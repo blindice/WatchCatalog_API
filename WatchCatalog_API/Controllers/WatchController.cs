@@ -19,10 +19,8 @@ namespace WatchCatalog_API.Controllers
     {
         readonly IWatchService _service;
 
-        public WatchController(IWatchService service)
-        {
-            _service = service;
-        }
+        public WatchController(IWatchService service) => _service = service;
+
 
         [HttpGet("getwatches")]
         public async Task<IActionResult> GetWatchesAsync([FromQuery] WatchPageParameters pageParam, CancellationToken cancellationToken)
@@ -67,8 +65,7 @@ namespace WatchCatalog_API.Controllers
         [ValidationFilterAttribute]
         public async Task<IActionResult> CreateWatchAsync([FromForm] CreateWatchDTO watch)
         {
-            //await _repo.AddWatchAsync(watch);
-            var result = await _service.CreateWatchAsync(watch);
+            WatchDetailsDTO result = await _service.CreateWatchAsync(watch);
 
             return Ok(result);
         }
