@@ -7,17 +7,7 @@ namespace WatchCatalog_API.Filters
 {
     public class ValidationFilterAttribute : Attribute, IActionFilter
     {
-        public void OnActionExecuted(ActionExecutedContext context)
-        {
-            //if (context.Result is null) return;
-
-            //var result = (ObjectResult)context.Result;
-
-            //if (result.StatusCode == 200)
-            //{
-            //    return;
-            //}
-        }
+        public void OnActionExecuted(ActionExecutedContext context){}
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
