@@ -16,13 +16,12 @@ namespace WatchCatalog_API.Model
         [StringLength(20)]
         [Unicode(false)]
         public string WatchName { get; set; } = null!;
-        [StringLength(50)]
+        [StringLength(500)]
         [Unicode(false)]
         public string Short_description { get; set; } = null!;
-        [StringLength(100)]
         [Unicode(false)]
         public string Full_Description { get; set; } = null!;
-        [Column(TypeName = "decimal(13, 4)")]
+        [Column(TypeName = "decimal(13, 2)")]
         public decimal Price { get; set; }
         [StringLength(50)]
         [Unicode(false)]

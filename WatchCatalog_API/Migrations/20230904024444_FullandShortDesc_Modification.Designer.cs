@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WatchCatalog_API.Context;
 
@@ -11,9 +12,10 @@ using WatchCatalog_API.Context;
 namespace WatchCatalog_API.Migrations
 {
     [DbContext(typeof(WatchContext))]
-    partial class WatchContextModelSnapshot : ModelSnapshot
+    [Migration("20230904024444_FullandShortDesc_Modification")]
+    partial class FullandShortDesc_Modification
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,7 +77,7 @@ namespace WatchCatalog_API.Migrations
                         .HasColumnType("varchar(30)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(13,2)");
+                        .HasColumnType("decimal(13,4)");
 
                     b.Property<string>("Short_description")
                         .IsRequired()

@@ -26,13 +26,15 @@ namespace WatchCatalog_API.Services
 
         public async Task<PagedList<WatchDTO>> GetWatchesAsync(WatchPageParameters pageParams, CancellationToken cancellationToken)
         {
-            IQueryable<WatchDTO> watches = _repo.GetWatchByCondition(w => w.WatchName.Contains(pageParams.SearchString) 
+            IQueryable<WatchDTO> watches = _repo.GetWatchByCondition(w => w.WatchName.Contains(pageParams.SearchString)
                                                 || w.Short_description.Contains(pageParams.SearchString)
                                                 || w.Full_Description.Contains(pageParams.SearchString)
                                                 || w.Strap.Contains(pageParams.SearchString)
                                                 || w.Jewel.Contains(pageParams.SearchString)
                                                 || w.Case.Contains(pageParams.SearchString)
                                                 || w.Chronograph.Contains(pageParams.SearchString))
+                                                .OrderByDescending(w => w.IsActive)
+                                                .ThenByDescending(w => w.WatchId)
                                                 .Select(w => new WatchDTO
                                                 {
                                                     WatchId = w.WatchId,
