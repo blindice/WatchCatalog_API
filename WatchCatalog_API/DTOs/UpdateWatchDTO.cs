@@ -13,12 +13,13 @@ namespace WatchCatalog_API.DTOs
 
         public IFormFile? Image { get; set; }
 
-        [StringLength(20)]
+        [StringLength(100)]
         [Unicode(false)]
         public string WatchName { get; set; } = null!;
-        [StringLength(500)]
+        [StringLength(200)]
         [Unicode(false)]
         public string Short_description { get; set; } = null!;
+        [StringLength(600)]
         [Unicode(false)]
         public string Full_Description { get; set; } = null!;
         [Column(TypeName = "decimal(13, 2)")]
