@@ -53,8 +53,9 @@ namespace WatchCatalog_API.Migrations
 
                     b.Property<string>("Full_Description")
                         .IsRequired()
+                        .HasMaxLength(600)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(max)");
+                        .HasColumnType("varchar(600)");
 
                     b.Property<decimal>("Height")
                         .HasColumnType("decimal(8,2)");
@@ -79,9 +80,9 @@ namespace WatchCatalog_API.Migrations
 
                     b.Property<string>("Short_description")
                         .IsRequired()
-                        .HasMaxLength(500)
+                        .HasMaxLength(200)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(500)");
+                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("Strap")
                         .IsRequired()
@@ -94,9 +95,9 @@ namespace WatchCatalog_API.Migrations
 
                     b.Property<string>("WatchName")
                         .IsRequired()
-                        .HasMaxLength(20)
+                        .HasMaxLength(100)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<decimal>("Weight")
                         .HasColumnType("decimal(8,2)");

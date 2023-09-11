@@ -4,7 +4,7 @@
 
 namespace WatchCatalog_API.Migrations
 {
-    public partial class InitialMigrate : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,10 +15,10 @@ namespace WatchCatalog_API.Migrations
                     WatchId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Image = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    WatchName = table.Column<string>(type: "varchar(20)", unicode: false, maxLength: 20, nullable: false),
-                    Short_description = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
-                    Full_Description = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(13,4)", nullable: false),
+                    WatchName = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false),
+                    Short_description = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
+                    Full_Description = table.Column<string>(type: "varchar(600)", unicode: false, maxLength: 600, nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(13,2)", nullable: false),
                     Chronograph = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
                     Caliber = table.Column<string>(type: "varchar(30)", unicode: false, maxLength: 30, nullable: false),
                     Weight = table.Column<decimal>(type: "decimal(8,2)", nullable: false),

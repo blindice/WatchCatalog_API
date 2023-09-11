@@ -12,8 +12,8 @@ using WatchCatalog_API.Context;
 namespace WatchCatalog_API.Migrations
 {
     [DbContext(typeof(WatchContext))]
-    [Migration("20230815073501_InitialMigrate")]
-    partial class InitialMigrate
+    [Migration("20230911092540_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,9 +55,9 @@ namespace WatchCatalog_API.Migrations
 
                     b.Property<string>("Full_Description")
                         .IsRequired()
-                        .HasMaxLength(100)
+                        .HasMaxLength(600)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(600)");
 
                     b.Property<decimal>("Height")
                         .HasColumnType("decimal(8,2)");
@@ -78,13 +78,13 @@ namespace WatchCatalog_API.Migrations
                         .HasColumnType("varchar(30)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(13,4)");
+                        .HasColumnType("decimal(13,2)");
 
                     b.Property<string>("Short_description")
                         .IsRequired()
-                        .HasMaxLength(50)
+                        .HasMaxLength(200)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("Strap")
                         .IsRequired()
@@ -97,9 +97,9 @@ namespace WatchCatalog_API.Migrations
 
                     b.Property<string>("WatchName")
                         .IsRequired()
-                        .HasMaxLength(20)
+                        .HasMaxLength(100)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<decimal>("Weight")
                         .HasColumnType("decimal(8,2)");
