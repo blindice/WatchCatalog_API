@@ -32,7 +32,8 @@ namespace WatchCatalog_API.Services
                                                 || w.Strap.Contains(pageParams.SearchString)
                                                 || w.Jewel.Contains(pageParams.SearchString)
                                                 || w.Case.Contains(pageParams.SearchString)
-                                                || w.Chronograph.Contains(pageParams.SearchString))
+                                                || w.Chronograph.Contains(pageParams.SearchString)
+                                                || w.Caliber.Contains(pageParams.SearchString))
                                                 .OrderByDescending(w => w.IsActive)
                                                 .ThenByDescending(w => w.WatchId)
                                                 .Select(w => new WatchDTO

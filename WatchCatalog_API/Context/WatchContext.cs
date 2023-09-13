@@ -8,6 +8,11 @@ namespace WatchCatalog_API.Context
 {
     public partial class WatchContext : DbContext
     {
+        public WatchContext(DbContextOptions<WatchContext> options)
+            : base(options)
+        {
+        }
+
         public virtual DbSet<tbl_watch> tbl_watches { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
