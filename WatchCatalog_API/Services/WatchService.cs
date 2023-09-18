@@ -75,7 +75,7 @@ namespace WatchCatalog_API.Services
                 var modifiedWatch = _mapper.Map<tbl_watch>(watch);
 
 
-                if (!string.IsNullOrEmpty(verifiedWatch.Image) && watch.Image != null)
+                if (!string.IsNullOrEmpty(verifiedWatch.Image))
                 {
                     await _storageService.DeleteAsync(verifiedWatch.Image);
                     deletedImageName = verifiedWatch.Image;
@@ -88,10 +88,10 @@ namespace WatchCatalog_API.Services
                     updatedImageName = modifiedWatch.Image;
                     isUpdated = true;
                 }
-                else
-                {
-                    modifiedWatch.Image = verifiedWatch.Image;
-                }
+                //else
+                //{
+                //    modifiedWatch.Image = verifiedWatch.Image;
+                //}
 
                 await _repo.UpdateWatchAsync(modifiedWatch);
                 var resultWatch = _mapper.Map<WatchDetailsDTO>(modifiedWatch);
