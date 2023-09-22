@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WatchCatalog_API.Helpers;
 
 namespace WatchCatalog_API.DTOs
 {
@@ -11,6 +12,8 @@ namespace WatchCatalog_API.DTOs
         [RegularExpression("^[0-9]*$", ErrorMessage = "Id must be numeric")]
         public int WatchId { get; set; }
 
+        [MaxFileSize(5 * 1024 * 1024)]
+        [AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png" })]
         public IFormFile? Image { get; set; }
 
         [StringLength(100)]

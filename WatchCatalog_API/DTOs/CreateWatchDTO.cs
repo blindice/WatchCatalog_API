@@ -2,11 +2,14 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using WatchCatalog_API.Helpers;
 
 namespace WatchCatalog_API.DTOs
 {
     public class CreateWatchDTO
     {
+        [MaxFileSize(5 * 1024 * 1024)]
+        [AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png" })]
         public IFormFile? Image { get; set; }
 
         [StringLength(100)]
